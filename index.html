@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Daftar Berita</h1>
+    <button id='button' class="btn btn-primary">Tampilkan berita</button>
+    <div id="root">
+        <!-- disini tampil data -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script>
+        $(function() { // = document ready function
+            $('#button').click(function() {
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/posts',
+                    method: 'GET'
+                }).then(function(data) { // ini promise
+                    console.log(data)
+                    //kita dapat data json dalam variable data
+                    for (let index = 0; index < data.length; index++) {
+                        const berita = data[index];
+                        var root = document.getElementById('root')
+                        var judul = document.createElement('h4')
+                        judul.innerHTML = berita.title
+                        root.appendChild(judul)
+                    }
+                    $('h4').addClass('btn btn-danger')
+            })
+        });
+       
+       })
+    </script>
+</body>
+</html>
